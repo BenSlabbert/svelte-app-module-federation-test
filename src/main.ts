@@ -6,7 +6,7 @@ const app = new App({
   target: document.getElementById("app"),
   props: {
     name: 'world',
-    baseURL: '/',
+    baseURL: '',
   }
 });
 
