@@ -1,5 +1,9 @@
 #!make
 
+.PHONY: install
+install:
+	yarn
+
 .PHONY: build
 build:
 	yarn run build
