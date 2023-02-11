@@ -3,6 +3,5 @@
 node_modules
 .yarn/
 public/build/
-public/*.js
-public/*.css
+out/
 .idea/

@@ -2,7 +2,7 @@
   import {Router, Route, Link} from "svelte-navigator";
   import Navigate from "./Navigate.svelte";
 
-  export let name;
+  export let name: string;
   export let baseURL;
 </script>
 
