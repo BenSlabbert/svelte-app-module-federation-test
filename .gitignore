@@ -1,0 +1,8 @@
+.DS_Store
+.pnp.*
+node_modules
+.yarn/
+public/build/
+public/*.js
+public/*.css
+.idea/
