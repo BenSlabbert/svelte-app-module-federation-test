@@ -1,81 +1,78 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
-const path = require('path');
-const sveltePreprocess = require('svelte-preprocess');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
+const path = require('path')
+const sveltePreprocess = require('svelte-preprocess')
 
-const mode = process.env.NODE_ENV || 'development';
-const prod = mode === 'production';
+const mode = process.env.NODE_ENV || 'development'
+const prod = mode === 'production'
 
 module.exports = {
 	entry: {
-		'build/bundle': ['./src/main.ts']
+		'build/bundle': ['./src/main.ts'],
 	},
 	resolve: {
 		alias: {
-			svelte: path.dirname(require.resolve('svelte/package.json'))
+			svelte: path.dirname(require.resolve('svelte/package.json')),
 		},
 		extensions: ['.mjs', '.js', '.ts', '.svelte'],
-		mainFields: ['svelte', 'browser', 'module', 'main']
+		mainFields: ['svelte', 'browser', 'module', 'main'],
 	},
 	output: {
 		path: path.join(__dirname, '/out'),
 		filename: '[name].js',
-		chunkFilename: '[name].[id].js'
+		chunkFilename: '[name].[id].js',
 	},
 	module: {
-			rules: [
-				{
-					test: /\.ts$/,
-					loader: 'ts-loader',
-					exclude: /node_modules/
-				},
-				{
+		rules: [
+			{
+				test: /\.ts$/,
+				loader: 'ts-loader',
+				exclude: /node_modules/,
+			},
+			{
 				test: /\.svelte$/,
 				use: {
 					loader: 'svelte-loader',
 					options: {
 						compilerOptions: {
-							dev: !prod
+							dev: !prod,
 						},
 						emitCss: prod,
 						hotReload: !prod,
-							preprocess: sveltePreprocess({ sourceMap: !prod })
-					}
-				}
+						preprocess: sveltePreprocess({ sourceMap: !prod }),
+					},
+				},
 			},
 			{
 				test: /\.css$/,
-				use: [
-					MiniCssExtractPlugin.loader,
-					'css-loader'
-				]
+				use: [MiniCssExtractPlugin.loader, 'css-loader'],
 			},
 			{
 				// required to prevent errors from Svelte on Webpack 5+
 				test: /node_modules\/svelte\/.*\.mjs$/,
 				resolve: {
-					fullySpecified: false
-				}
-			}
-		]
+					fullySpecified: false,
+				},
+			},
+		],
 	},
 	mode,
 	plugins: [
-    new ModuleFederationPlugin({
-      name: "app",
-      filename: "remoteEntry.js",
-      remotes: {},
-      exposes: {
-        "./App": "./src/App.svelte",
-      },
-      shared: require("./package.json").dependencies,
-    }),
+		new ModuleFederationPlugin({
+			name: 'app',
+			filename: 'remoteEntry.js',
+			remotes: {},
+			exposes: {
+				'./App': './src/App.svelte',
+			},
+			shared: require('./package.json').dependencies,
+		}),
 		new MiniCssExtractPlugin({
-			filename: '[name].css'
-		})
+			filename: '[name].css',
+		}),
 	],
 	devtool: prod ? false : 'source-map',
 	devServer: {
-		hot: true
-	}
-};
+		hot: true,
+	},
+}

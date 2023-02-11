@@ -8,9 +8,21 @@ install:
 build:
 	yarn run build
 
+.PHONY: check
+check:
+	yarn run validate
+
 .PHONY: run
 run:
 	yarn run dev
+
+.PHONY: lint
+lint:
+	yarn run lint
+
+.PHONY: fmt
+fmt:
+	yarn run format
 
 .PHONY: clean
 clean:

@@ -1,13 +1,13 @@
-import './global.css';
+import './global.css'
 
-import App from './App.svelte';
+import App from './App.svelte'
 
 const app = new App({
-  target: document.getElementById("app"),
-  props: {
-    name: 'world',
-    baseURL: '',
-  }
-});
+	target: document.getElementById('app'),
+	props: {
+		name: 'world',
+		baseURL: '',
+	},
+})
 
-export default app;
+export default app
