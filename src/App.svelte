@@ -1,38 +1,38 @@
 <script lang="ts">
-  import {onMount} from 'svelte';
-  import {Router, Route, Link} from "svelte-navigator";
-  import Navigate from "./Navigate.svelte";
+	import { onMount } from 'svelte'
+	import { Router, Route, Link } from 'svelte-navigator'
+	import Navigate from './Navigate.svelte'
 
-  export let name: string;
-  export let baseURL;
+	export let name: string
+	export let baseURL
 
-  onMount(() => {
-    fetch('http://localhost:8080/api/item/1')
-  .then((response) => response.json())
-  .then((data) => console.log(data));
-  })
+	onMount(() => {
+		fetch('http://localhost:8080/api/item/1')
+			.then((response) => response.json())
+			.then((data) => console.log(data))
+	})
 </script>
 
 <!--this works when loading as a module-->
 <!--we need to start at '/' when running as an SPA-->
 <Router>
-    <nav>
-      <Link to="{baseURL}">Base</Link>
-      <Link to="{baseURL}/123">{`${baseURL}/123`}</Link>
-    </nav>
+	<nav>
+		<Link to={baseURL}>Base</Link>
+		<Link to="{baseURL}/123">{`${baseURL}/123`}</Link>
+	</nav>
 
-    <Navigate/>
+	<Navigate />
 
-    <main>
-        <h1>name {name}!</h1>
-        <p>baseURL {baseURL}</p>
+	<main>
+		<h1>name {name}!</h1>
+		<p>baseURL {baseURL}</p>
 
-        <Route path="{baseURL}">
-            <h3>home</h3>
-        </Route>
+		<Route path={baseURL}>
+			<h3>home</h3>
+		</Route>
 
-        <Route path="{baseURL}/123">
-            <h3>{baseURL}/123</h3>
-        </Route>
-    </main>
+		<Route path="{baseURL}/123">
+			<h3>{baseURL}/123</h3>
+		</Route>
+	</main>
 </Router>
