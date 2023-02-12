@@ -2,19 +2,19 @@
 	import { onMount } from 'svelte'
 	import { Router, Route, Link } from 'svelte-navigator'
 	import Navigate from './Navigate.svelte'
+	import axios from 'axios'
 
 	export let name: string
-	export let baseURL
+	export let baseURL: string
 
 	onMount(() => {
-		fetch('http://localhost:8080/api/item/1')
-			.then((response) => response.json())
+		axios
+			.get('http://localhost:8080/api/item/1')
+			.then((response) => response.data)
 			.then((data) => console.log(data))
 	})
 </script>
 
-<!--this works when loading as a module-->
-<!--we need to start at '/' when running as an SPA-->
 <Router>
 	<nav>
 		<Link to={baseURL}>Base</Link>
