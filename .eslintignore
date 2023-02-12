@@ -14,3 +14,5 @@ yarn.lock
 src/lib/federatedModuleLoader.js
 out/
 webpack.config.js
+.pnp.*
+
