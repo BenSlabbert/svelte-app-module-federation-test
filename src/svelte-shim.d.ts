@@ -1,3 +1,4 @@
+// no idea why, but this works...
 declare module '*.svelte' {
 	import type { ComponentType } from 'svelte'
 	const component: ComponentType
